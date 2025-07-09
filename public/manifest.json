@@ -1,6 +1,6 @@
 {
-  "short_name": "AppAvaliee",
-  "name": "AppAvaliee - Ganhe dinheiro avaliando",
+  "short_name": "Google",
+  "name": "Google",
   "icons": [
     {
       "src": "icongoogle.png",
@@ -8,12 +8,12 @@
       "type": "image/png"
     },
     {
-      "src": "icongoogle.png",
+      "src": "googlepng.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "icongoogle.png",
+      "src": "googlepng.png",
       "type": "image/png",
       "sizes": "512x512"
     }
