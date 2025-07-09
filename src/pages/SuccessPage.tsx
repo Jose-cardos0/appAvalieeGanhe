@@ -35,7 +35,7 @@ export function SuccessPage() {
 
       setTimeout(() => {
         notification.remove();
-      }, 3000);
+      }, 6000);
     };
 
     showNotification();
