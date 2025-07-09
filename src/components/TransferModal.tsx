@@ -45,7 +45,7 @@ export function TransferModal({ isOpen, onClose }: TransferModalProps) {
 
     setTimeout(() => {
       notification.remove();
-    }, 3000);
+    }, 6000);
 
     setAmount("");
     onClose();

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Wallet, Home as HomeIcon, User } from "lucide-react";
 import { useApp } from "../context/AppContext";
 import { TransferModal } from "../components/TransferModal";
+import { AnimatedValue } from "../components/AnimatedValue";
 
 export function Home() {
   const navigate = useNavigate();
@@ -43,9 +44,10 @@ export function Home() {
           </p>
 
           {/* Valor principal */}
-          <p className="text-center text-[#1A0FB0] text-5xl font-bold mb-6">
-            $ {userData.totalFormsValue.toFixed(2)}
-          </p>
+          <AnimatedValue
+            value={userData.totalFormsValue}
+            className="text-center text-[#1A0FB0] text-5xl font-bold mb-6"
+          />
 
           {/* Card do salário */}
           <div className="bg-[#F1F2FF] rounded-xl p-4 mb-6">
