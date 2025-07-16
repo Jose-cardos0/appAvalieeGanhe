@@ -8,13 +8,13 @@
       "type": "image/png"
     },
     {
-      "src": "icon192.png",
+      "src": "icon-192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "icon512.png",
+      "src": "icon-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
@@ -26,5 +26,7 @@
   "background_color": "#F1F2FF",
   "orientation": "portrait",
   "scope": "/",
-  "prefer_related_applications": false
+  "prefer_related_applications": false,
+  "permissions": ["notifications"],
+  "gcm_sender_id": "YOUR_SENDER_ID"
 }

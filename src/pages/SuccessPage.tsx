@@ -13,32 +13,63 @@ export function SuccessPage() {
   useEffect(() => {
     if (notificationShown.current) return;
 
-    const showNotification = () => {
-      const formReward = getFormReward(id || "");
-      const notification = document.createElement("div");
-      notification.className =
-        "fixed top-4 left-1/2 transform -translate-x-1/2 bg-[#424242]/60 text-white px-4 py-3 rounded-[20px] flex items-center gap-3 shadow-lg z-50 w-[90%] max-w-[360px]";
-      notification.style.backdropFilter = "blur(0px)";
-      notification.innerHTML = `
-        <div class="flex items-center gap-3 w-full">
-          <img src="https://i.ibb.co/YTBTkCwr/icongoogle.png" alt="Google" class="w-7 h-7" />
-          <div class="flex-1">
-            <p class="font-medium text-[14px] leading-tight">Nuevo formulario rellenado de Google</p>
-            <p class="text-[13px] text-white/90">Has recebido: US$ ${formReward.toFixed(
-              2
-            )}</p>
-          </div>
-          <span class="text-[13px] text-white/70 self-start">Ahora</span>
-        </div>
-      `;
-      document.body.appendChild(notification);
+    const registerServiceWorker = async () => {
+      try {
+        // Pedir permissão para notificações
+        const permission = await Notification.requestPermission();
+        if (permission !== "granted") return;
 
-      setTimeout(() => {
-        notification.remove();
-      }, 6000);
+        // Registrar service worker
+        const registration = await navigator.serviceWorker.register(
+          "/service-worker.js"
+        );
+
+        // Mostrar notificação
+        const formReward = getFormReward(id || "");
+        const title = "Novo formulário preenchido do Google";
+        const options = {
+          body: `Você recebeu: US$ ${formReward.toFixed(2)}`,
+          icon: "icon-192.png",
+          badge: "icon-192.png",
+          vibrate: [200, 100, 200],
+          tag: "form-reward",
+          renotify: true,
+          actions: [
+            { action: "open", title: "Abrir App" },
+            { action: "close", title: "Fechar" },
+          ],
+        };
+
+        await registration.showNotification(title, options);
+
+        // Mostrar notificação in-app também
+        const notification = document.createElement("div");
+        notification.className =
+          "fixed top-4 left-1/2 transform -translate-x-1/2 bg-[#424242]/60 text-white px-4 py-3 rounded-[20px] flex items-center gap-3 shadow-lg z-50 w-[90%] max-w-[360px]";
+        notification.style.backdropFilter = "blur(0px)";
+        notification.innerHTML = `
+          <div class="flex items-center gap-3 w-full">
+            <img src="https://i.ibb.co/YTBTkCwr/icongoogle.png" alt="Google" class="w-7 h-7" />
+            <div class="flex-1">
+              <p class="font-medium text-[14px] leading-tight">Nuevo formulario rellenado de Google</p>
+              <p class="text-[13px] text-white/90">Has recebido: US$ ${formReward.toFixed(
+                2
+              )}</p>
+            </div>
+            <span class="text-[13px] text-white/70 self-start">Ahora</span>
+          </div>
+        `;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.remove();
+        }, 6000);
+      } catch (error) {
+        console.error("Erro ao registrar notificações:", error);
+      }
     };
 
-    showNotification();
+    registerServiceWorker();
     notificationShown.current = true;
   }, [id, getFormReward]);
 
