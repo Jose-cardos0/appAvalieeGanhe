@@ -26,9 +26,9 @@ export function SuccessPage() {
 
         // Mostrar notificação
         const formReward = getFormReward(id || "");
-        const title = "Novo formulário preenchido do Google";
+        const title = "Nuevo formulario de Google completado";
         const options = {
-          body: `Você recebeu: US$ ${formReward.toFixed(2)}`,
+          body: `Recibiste: US$ ${formReward.toFixed(2)}`,
           icon: "icon-192.png",
           badge: "icon-192.png",
           vibrate: [200, 100, 200],
